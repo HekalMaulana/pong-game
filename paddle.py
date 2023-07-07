@@ -1,32 +1,26 @@
 from turtle import Turtle
 
-PADDLE_WIDTH = 4
-PADDLE_HEIGHT = 1
-START_X = 350
-START_Y = 0
+STRETCH_WIDTH = 5
+STRETCH_LEN = 1
 
 
-class Paddle:
-    def __init__(self):
-        self.paddles = []
-        self.first_paddle()
-
-    def first_paddle(self):
-        user_paddle = Turtle(shape="square")
-        user_paddle.color("white")
-        user_paddle.shapesize(stretch_wid=PADDLE_WIDTH, stretch_len=PADDLE_HEIGHT)
-        user_paddle.penup()
-        user_paddle.goto(START_X, START_Y)
-        self.paddles.append(user_paddle)
+class Paddle(Turtle):
+    def __init__(self, paddle_position):
+        super().__init__()
+        self.shape("square")
+        self.color("white")
+        self.shapesize(stretch_wid=STRETCH_WIDTH, stretch_len=STRETCH_LEN)
+        self.penup()
+        self.goto(paddle_position)
 
     def up(self):
-        y = self.paddles[0].ycor()
-        if y < 230:
-            y += 20
-        self.paddles[0].goto(x=START_X, y=y)
+        new_y = self.ycor()
+        if new_y < 250:
+            new_y += 20
+        self.goto(x=self.xcor(), y=new_y)
 
     def down(self):
-        y = self.paddles[0].ycor()
-        if y > -230:
-            y -= 20
-        self.paddles[0].goto(x=START_X, y=y)
+        new_y = self.ycor()
+        if new_y > -250:
+            new_y -= 20
+        self.goto(x=self.xcor(), y=new_y)
